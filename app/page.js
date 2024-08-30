@@ -10,7 +10,7 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm your research assistant. You can upload a link to a research paper, and I'll help you find the information you're looking for.",
+      content: "Welcome to ResearchQuery! I'm here to help you dive deep into research papers and extract the information you need. Upload a link to a paper, and ask me anything you'd like to know about it.",
     },
   ])
   const [message, setMessage] = useState('')
@@ -96,10 +96,8 @@ export default function Home() {
 
     setMessages((messages) => [
       ...messages,
-      { role: 'assistant', content: 'Thanks for uploading' },
-      { role: 'assistant', content: 'Verifying and loading data' },
-      { role: 'assistant', content: 'Please be patient!' },
- 
+      { role: 'assistant', content: 'Thank you for uploading the link! I’m verifying and loading the data now.' },
+      { role: 'assistant', content: 'This may take a moment. Please be patient as I gather and analyze the information.' },
     ]);
 
     setLink('');
@@ -123,13 +121,12 @@ export default function Home() {
   
       setMessages((messages) => [
         ...messages,
-        { role: 'assistant', content: 'Data loaded successfully!' },
-        { role: 'assistant', content: 'What would you like to know?' },
+        { role: 'assistant', content: 'Data successfully loaded! What specific information would you like to explore?' },
       ]);
     } catch (error) {
       setMessages((messages) => [
         ...messages,
-        { role: 'assistant', content: 'An error occurred while loading the data.' },
+        { role: 'assistant', content: 'Oops! There was an issue loading the data. Please try again or check the link.' },
       ]);
     } finally {
       setIsLoading(false);

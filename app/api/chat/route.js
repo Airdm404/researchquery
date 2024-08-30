@@ -3,8 +3,7 @@ import OpenAI from 'openai'
 import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
 import { OpenAIEmbeddings } from "@langchain/openai";
 
-
-const systemPrompt = "You're a research chatbot assistant.";
+const systemPrompt = "You're a highly knowledgeable research assistant, specialized in helping users extract and understand information from academic papers and technical documents. Always provide concise, accurate, and contextually relevant responses.";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -45,8 +44,7 @@ export async function POST(req) {
         messages: [
             { role: 'system', content: systemPrompt },
             ...messages, // Previous conversation history
-            { role: 'user', content: `Information I query directly: ${context}` },
-            { role: 'user', content: query } // User's query about the study
+            { role: 'user', content: `Based on the following context, please address the user's query:\n\nContext: ${context}\n\nUser's Query: ${query}` },
         ],
         model: 'gpt-4',
         stream: true,

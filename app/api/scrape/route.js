@@ -36,6 +36,7 @@ export async function POST(request) {
         const loader = new PuppeteerWebBaseLoader(url, {
             launchOptions: {
               headless: "new",
+              args: ['--no-sandbox', '--disable-setuid-sandbox'],
             },
             async evaluate(page, browser) {
               try {
